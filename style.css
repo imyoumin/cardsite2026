@@ -1,0 +1,157 @@
+/* 1. 기본 스타일 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #FDF6D7;
+  font-family: 'Trap', -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+/* 2. 전체 화면 레이아웃 */
+.screen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* 3. 카메라 컨테이너 */
+.camera-container {
+  position: absolute;
+  top: 13%;
+  left: 8%;
+  right: 8%;
+  height: 60%;
+  background: #D9D9D9;
+  border-radius: 24px;
+  overflow: hidden; /* 박스 밖 잘라내기 */
+  z-index: 1;
+}
+
+/* ✅ video를 컨테이너에 무조건 꽉 채우기 */
+#webcam-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #D9D9D9;
+}
+
+/* (선택) canvas overlay 대응 */
+.camera-container canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 4. 텍스트 요소 개별 배치 */
+.text-element {
+  position: absolute;
+  font-size: 14px;
+  color: black;
+  font-weight: 500;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.year-2026 {
+  top: 7.5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.happy { bottom: 18%; left: 10%; }
+.new-word { bottom: 18%; left: 50%; transform: translateX(-50%); }
+.year-word { bottom: 18%; right: 10%; }
+
+/* 5. 최하단 안내 문구 그룹 */
+.bottom-group {
+  position: absolute;
+  bottom: 6%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 5;
+}
+
+.guide-text {
+  color: #E0432A;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.lost-link {
+  color: #AEAEAE;
+  font-size: 9px;
+  text-decoration: underline;
+}
+
+/* ✅ 카메라 로딩 오버레이 (인식 성공 시 카메라 영역만 회색 로딩으로 전환) */
+.camera-loading {
+  position: absolute;
+  inset: 0;
+  display: none;              /* 기본은 숨김 */
+  align-items: center;
+  justify-content: center;
+  background: #D9D9D9;        /* 회색 */
+  z-index: 20;
+  padding: 20px;
+  text-align: center;
+}
+
+.camera-loading #loading-text {
+  color: #E0432A;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* 로딩 상태일 때 */
+.camera-container.is-loading .camera-loading {
+  display: flex;
+}
+
+.camera-container.is-loading #webcam-video {
+  opacity: 0; /* 카메라 화면만 숨김 */
+}
+
+/* (선택) 로딩 때 코너 가이드 숨기기 */
+.camera-container.is-loading .corner {
+  display: none;
+}
+
+/* 6. 빨간색 포커스 가이드 (가로로 긴 직사각형 프레임) */
+:root{
+  --guide-inset-x: 20px;   /* 좌우 여백(작게) */
+  --guide-inset-y: 160px;  /* 상하 여백(크게) -> 프레임 높이 줄어듦 */
+  --corner-size: 28px;     /* ㄱ 모양 길이 */
+  --corner-thick: 2px;     /* 선 두께 */
+}
+
+.corner {
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  border: var(--corner-thick) solid #E0432A;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tl { top: var(--guide-inset-y); left: var(--guide-inset-x); border-right: none; border-bottom: none; }
+.tr { top: var(--guide-inset-y); right: var(--guide-inset-x); border-left: none; border-bottom: none; }
+.bl { bottom: var(--guide-inset-y); left: var(--guide-inset-x); border-right: none; border-top: none; }
+.br { bottom: var(--guide-inset-y); right: var(--guide-inset-x); border-left: none; border-top: none; }

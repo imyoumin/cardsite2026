@@ -1,0 +1,205 @@
+/* 전체 배경 */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: #FDF6D7;
+  overflow: hidden;
+  font-family: 'Trap', -apple-system, sans-serif;
+}
+
+/* 화면 영역(최대 500px 유지) */
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 100svh; /* 모바일 주소창 대응 */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* ✅ “원본 디자인 캔버스” (고정 px) */
+:root{
+  --base-w: 414; /* 디자인 기준 너비 */
+  --base-h: 940; /* 디자인 기준 높이 */
+  --s: 1;        /* JS가 계산해서 넣는 스케일 */
+}
+
+.design {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--base-w) * 1px);
+  height: calc(var(--base-h) * 1px);
+  transform: translate(-50%, -50%) scale(var(--s));
+  transform-origin: center center;
+}
+
+/* 이미지 공통 */
+.design img {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =========================
+   ✅ 여기(좌표/크기/회전)만 바꾸면 배치 변경
+========================= */
+
+/* 편지 */
+.letter{
+  width: 351px;
+  height: 869px;
+  left: 45px;
+  top: 43px;
+}
+
+/* 말 */
+.horse{
+  width: 228.15px;
+  height: 178.02px;
+  left: 237px;
+  top: 664px;
+  transform: rotate(12deg);
+  transform-origin: top left;
+}
+
+/* 텍스트들 */
+.title{
+  position: absolute;
+  left: 169px;
+  top: 201px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.message{
+  position: absolute;
+  left: 100px;
+  top: 239px;
+  width: 241px;
+  text-align: center;
+  color: #E0432A;
+  font-size: 20px;
+  font-family: 'KoPubWorldBatang', serif;
+  font-weight: 500;
+  line-height: 1.25;
+  word-break: keep-all;
+}
+
+/* ✅ 운세 랜덤 애니메이션 */
+.message.animate-in{
+  animation: fortunePop 520ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* 타자 커서 */
+.message.typing::after{
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: currentColor;
+  animation: blink 900ms steps(1) infinite;
+}
+
+/* 반짝 효과 */
+.message.sparkle::before,
+.message.sparkle::after{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.message.sparkle::before{ animation: sparkleA 900ms ease-out 1; }
+.message.sparkle::after{  animation: sparkleB 900ms ease-out 1; }
+
+@keyframes fortunePop{
+  0%   { transform: translateY(10px) scale(.98); filter: blur(1px); opacity: 0; }
+  60%  { transform: translateY(-2px) scale(1.02); filter: blur(0); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes blink{
+  0%, 49% { opacity: 1; }
+  50%,100% { opacity: 0; }
+}
+
+@keyframes sparkleA{
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(.6); box-shadow: 0 0 0 rgba(224,67,42,0); }
+  30%  { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: -24px -10px 0 rgba(224,67,42,.45), 18px 8px 0 rgba(224,67,42,.35); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); box-shadow: -40px -18px 0 rgba(224,67,42,0), 34px 18px 0 rgba(224,67,42,0); }
+}
+
+@keyframes sparkleB{
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(.6); box-shadow: 0 0 0 rgba(224,67,42,0); }
+  35%  { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: -10px 22px 0 rgba(224,67,42,.35), 26px -14px 0 rgba(224,67,42,.35); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); box-shadow: -18px 40px 0 rgba(224,67,42,0), 44px -26px 0 rgba(224,67,42,0); }
+}
+
+.wish{
+  position: absolute;
+  left: 133px;
+  top: 478px;
+  text-align: center;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+.from{
+  position: absolute;
+  left: 261px;
+  top: 584px;
+  text-align: center;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.credit{
+  position: absolute;
+  left: 190px;
+  top: 884px;
+  text-align: center;
+  color: #E0432A;
+  font-size: 8px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.retry{
+  position: absolute;
+  left: 290px;
+  top: 770px;
+  text-align: center;
+  color: #E4E4E4;
+  font-size: 8px;
+  font-weight: 400;
+  white-space: nowrap;
+
+  /* ✅ 클릭 가능 */
+  cursor: pointer;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.retry:active{
+  opacity: 0.7;
+  transform: translateY(0.5px);
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Postcard Fortune 2026 - Page2</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage" id="stage">
+    <!-- 디자인 원본 캔버스(고정 px) -> JS가 화면에 맞게 scale -->
+    <div class="design" id="design">
+      <!-- 편지/말 이미지: src만 바꾸면 됨 -->
+      <img class="letter" src="assets\letter.png" alt="letter" />
+      <img class="horse" src="assets\horse.png" alt="horse" />
+
+      <div class="title">2026, 당신은...</div>
+
+      <div class="message">
+        어제의 자신보다 오늘 더 성장한 모습에 스스로 대견함을 느끼는 날들을 보냅니다.
+      </div>
+
+      <div class="wish">
+        새해복 많이 받으시구<br />
+        항상 건강하고 행복하시길!
+      </div>
+
+      <div class="from">from. 예림</div>
+
+      <div class="credit">d. 예림&nbsp;&nbsp;&nbsp;&nbsp;be. 유민</div>
+
+      <div class="retry" id="retryBtn">운세가 마음에 안 드시나요</div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

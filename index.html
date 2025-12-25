@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Postcard Fortune 2026</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body>
+  <div class="screen-wrapper">
+    <div class="text-element happy">happy</div>
+    <div class="text-element year-2026">2026</div>
+    <div class="text-element new-word">new</div>
+    <div class="text-element year-word">year</div>
+
+    <div class="bottom-group">
+      <p class="guide-text">당신이 받은 2026년, 붉은 말의 해 엽서를 인식시켜주세요.</p>
+      <!-- ✅ page3로 이동 -->
+      <a href="./page3/" class="lost-link">엽서를 잃어버렸어요...</a>
+    </div>
+
+    <div id="camera-area" class="camera-container">
+      <video id="webcam-video" autoplay playsinline muted></video>
+
+      <!-- ✅ 인식 성공 시 카메라 영역만 회색 로딩으로 전환 -->
+      <div id="camera-loading" class="camera-loading" aria-hidden="true">
+        <p id="loading-text">2026년을 향해 전력질주 중...</p>
+      </div>
+
+      <!-- ✅ 경로는 / 로 (웹 호환) -->
+      <audio id="hoof-audio" src="assets/hoof.mp3" preload="auto"></audio>
+
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

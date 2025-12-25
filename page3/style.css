@@ -1,0 +1,70 @@
+/* 배경/기본 */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: #FDF6D7;
+  overflow: hidden;
+  font-family: 'Trap', -apple-system, sans-serif;
+}
+
+/* 화면 영역(최대 500px) */
+.stage {
+  width: 100%;
+  max-width: 500px;
+  height: 100svh;       /* 모바일 주소창 대응 */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 내부 레이아웃 */
+.wrap {
+  width: 100%;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* 상단 문구 */
+.top-text {
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 이미지: 화면에 맞게 자동 조절 + 비율 유지 */
+.meme {
+  width: min(92vw, 385px);
+  height: auto;
+  aspect-ratio: 385 / 289; /* 피그마 비율 유지 */
+  object-fit: cover;
+  display: block;
+  border-radius: 6px; /* 살짝만 (원하면 제거 가능) */
+}
+
+/* 하단 카운트다운 */
+.countdown {
+  margin: 0;
+  color: #AEAEAE;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+/* (선택) 숫자 바뀔 때 살짝 깜빡 */
+.countdown.pulse {
+  animation: pulse 220ms ease-out;
+}
+@keyframes pulse {
+  0% { transform: translateY(1px); opacity: 0.7; }
+  100% { transform: translateY(0); opacity: 0.95; }
+}

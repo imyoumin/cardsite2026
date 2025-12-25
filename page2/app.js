@@ -5,15 +5,13 @@
   const stage = document.getElementById("stage");
   const root = document.documentElement;
 
-  const BASE_W = 414; // style.css --base-w 와 동일
-  const BASE_H = 940; // style.css --base-h 와 동일
+  const BASE_W = 414;
+  const BASE_H = 940;
 
   function updateScale() {
     if (!stage) return;
     const w = stage.clientWidth;
     const h = stage.clientHeight;
-
-    // 가로/세로 중 더 빡센 쪽에 맞춰서 축소(비율 유지)
     const s = Math.min(w / BASE_W, h / BASE_H);
     root.style.setProperty("--s", String(s));
   }
@@ -107,7 +105,7 @@
 
   const fortunes = fortunesText.split("\n").map(s => s.trim()).filter(Boolean);
 
-  // ✅ 새로고침마다 랜덤 (오늘 고정 원하면 true)
+  // ✅ 새로고침마다 랜덤
   const KEEP_SAME_FOR_TODAY = false;
 
   function getTodayKey() {
@@ -137,12 +135,10 @@
   function animateFortune(el, text) {
     if (!el) return;
 
-    // 애니메이션 클래스 리셋
     el.classList.remove("animate-in", "sparkle", "typing");
-    void el.offsetWidth; // reflow
+    void el.offsetWidth;
     el.classList.add("animate-in", "sparkle", "typing");
 
-    // 타자치기 효과
     el.textContent = "";
     let i = 0;
 
@@ -157,7 +153,7 @@
         const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
         setTimeout(tick, delay);
       } else {
-        el.classList.remove("typing"); // 커서 제거
+        el.classList.remove("typing");
       }
     };
 
@@ -169,14 +165,22 @@
     const fortune = pickFortune();
     animateFortune(messageEl, fortune);
 
-    // ✅ "운세가 마음에 안 드시나요" 클릭 -> 새 운세로 리로드
-    // ✅ "운세가 마음에 안 드시나요" 클릭 -> 페이지 새로고침
+    // ✅ "운세가 마음에 안 드시나요" 클릭 -> 새로고침
     const retryEl = document.getElementById("retryBtn");
     if (retryEl) {
-    retryEl.addEventListener("click", () => {
-        location.reload(); // 그냥 새로고침
-    });
+      retryEl.style.cursor = "pointer";
+      retryEl.addEventListener("click", () => location.reload());
     }
 
+    // ✅ 말 이미지 클릭 -> 새로고침
+    const horseEl = document.getElementById("horseBtn");
+    if (horseEl) {
+      horseEl.style.cursor = "pointer";
+      horseEl.addEventListener("click", () => location.reload());
+
+      // 모바일에서 더 안정적으로(탭) 동작
+      horseEl.addEventListener("pointerup", () => location.reload());
+      horseEl.addEventListener("touchend", () => location.reload(), { passive: true });
+    }
   });
 })();
